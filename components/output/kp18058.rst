@@ -1,0 +1,79 @@
+﻿KP18058 / KP18068 LED Driver
+===================
+
+.. seo::
+    :description: Instructions for setting up the KP18058 / KP18068 LED driver in ESPHome.
+    :keywords: KP18058, KP18068, LED driver, smurtBulb, softI2C
+
+.. _kp18058-component:
+
+Component Overview
+-------------------
+
+The **KP18058** component allows control of KP18058 LED drivers over soft I2C in ESPHome. This component is used in various lighting applications, enabling control of color and intensity through multiple output channels.
+
+Features:
+- Control up to 5 output channels (RGB and CW).
+- Soft I2C communication using configurable GPIO pins.
+
+Example Configuration
+---------------------
+
+To use the KP18058 component, you first need to configure the main component in your YAML file:
+
+.. code-block:: yaml
+
+    kp18058:
+      id: my_kp18058
+      data_pin: GPIOXX
+      clock_pin: GPIOXX
+      cw_current: 10  # mA, optional
+      rgb_current: 10  # mA, optional
+
+Configuration Variables
+************************
+
+- **id** (**Required**): A unique identifier for the KP18058 component.
+- **data_pin** (**Required**, :ref:`Pin Schema <config-pin_schema>`): The GPIO pin used for the I2C data line.
+- **clock_pin** (**Required**, :ref:`Pin Schema <config-pin_schema>`): The GPIO pin used for the I2C clock line.
+- **cw_current** (*Optional*, int): Maximum allowed current for cold-white channels in mA (0 - 77.5mA). Default is 5.
+- **rgb_current** (*Optional*, int): Maximum allowed current for RGB channels in mA (0 - 48). Default is 5.
+
+.. note::
+
+    Start with lower values for current settings to avoid damage. Gradually increase while monitoring performance compared to a stock bulb.
+
+Output Configuration
+---------------------
+
+The KP18058 component supports 5 output channels, which can be defined as follows:
+
+.. code-block:: yaml
+
+    output:
+      - platform: kp18058
+        id: output_red
+        kp18058_id: my_kp18058
+        channel: 1  # Valid values are 1-5
+
+Output Configuration Variables
+******************************
+
+- **id** (**Required**): A unique identifier for the output channel.
+- **kp18058_id** (**Required**): The ID of the parent KP18058 component.
+- **channel** (**Required**, int): physical output of the chip that will be driven by this output. Valid values are 1-5. You cannot assign channel to more than one output.
+
+.. note::
+
+    It is possible to enable both color and white channels at the same time, but it is not encouraged. Set the `rgbw_color_interlock` to `true` for safe operation.
+
+See Also
+--------
+
+- :doc:`/components/output/index`
+- :doc:`/components/output/bp5758d`
+- :doc:`/components/light/rgb`
+- :doc:`/components/light/rgbw`
+- :doc:`/components/light/rgbww`
+- :doc:`/components/light/rgbct`
+- :ghedit:`Edit`

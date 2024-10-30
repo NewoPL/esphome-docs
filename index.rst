@@ -727,6 +727,7 @@ Output Components
     ESP8266 Software PWM, components/output/esp8266_pwm, pwm.png
     GP8403, components/output/gp8403, gp8403.svg
     GPIO Output, components/output/gpio, gpio.svg
+    KP18058, components/output/kp18058, kp18058.png
     LibreTiny PWM, components/output/libretiny_pwm, pwm.png
     MCP4725, components/output/mcp4725, mcp4725.jpg
     MCP4728, components/output/mcp4728, mcp4728.jpg
