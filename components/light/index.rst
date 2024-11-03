@@ -48,6 +48,11 @@ All light configuration schemas inherit these options.
   <https://en.wikipedia.org/wiki/Gamma_correction>`__ to the light channels. Defaults to ``2.8``.
 - **default_transition_length** (*Optional*, :ref:`config-time`): The default transition length to use when no
   transition length is set in the light call. Defaults to ``1s``.
+- **dynamic_default_transition** (*Optional*, :ref:`config-time`):  Enables dynamic scaling of the default transition duration for 
+  changes in light brightness, RGB values, or color temperature settings. When enabled, this feature adjusts the default transition 
+  duration proportionally based on the largest change among these parameters. For instance, if a change equals 100%, the full 
+  default_transition_length is used; a 50% change would reduce the transition time by half. When this option is set to false, 
+  transitions will consistently use the full time specified in **default_transition_length**. Defaults to ``false``.
 - **flash_transition_length** (*Optional*, :ref:`config-time`): The transition length to use when flash is called.
   Defaults to ``0s``.
 - **initial_state** (*Optional*): The initial state the light should be set to on bootup. This state will be applied
